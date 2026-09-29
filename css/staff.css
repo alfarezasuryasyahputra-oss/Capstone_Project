@@ -1,0 +1,456 @@
+body.staff-body{
+    background:var(--soft);
+    min-height:100vh;
+}
+
+
+
+.login-card{
+    width:min(430px,92%);
+    margin:8vh auto;
+    background:#fff;
+    padding:34px;
+    border:1px solid var(--line);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+}
+
+.login-card h1{
+    font-size:2rem;
+    margin-bottom:6px;
+}
+
+.login-card p{
+    color:var(--muted);
+    margin-bottom:24px;
+}
+
+.staff-form{
+    display:grid;
+    gap:16px;
+}
+
+.staff-form label{
+    display:grid;
+    gap:7px;
+}
+
+.staff-form input{
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:12px;
+    font:inherit;
+}
+
+.error-box{
+    padding:12px;
+    border-radius:12px;
+    background:#fff0f0;
+    color:#9d3434;
+    margin-bottom:16px;
+}
+
+.back-link{
+    display:block;
+    margin-top:18px;
+    color:var(--primary-dark);
+    font-weight:700;
+}
+
+/*  LAYOUT UTAMA */
+
+.dashboard{
+    min-height:100vh;
+    display:grid;
+    grid-template-columns:240px minmax(0,1fr);
+}
+
+/* SIDEBAR DESKTOP*/
+
+.sidebar{
+    background:#2e2930;
+    color:#fff;
+    padding:24px 18px;
+    min-height:100vh;
+    position:sticky;
+    top:0;
+    align-self:start;
+}
+
+.brand{
+    font-weight:800;
+    font-size:1.15rem;
+    margin-bottom:25px;
+    line-height:1.3;
+}
+
+.sidebar nav{
+    display:block;
+}
+
+.sidebar a{
+    display:block;
+    color:#ddd5db;
+    padding:11px 12px;
+    border-radius:10px;
+    margin:5px 0;
+    text-decoration:none;
+    transition:.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:#4a4149;
+    color:#fff;
+}
+
+/*AREA KONTEN */
+
+.main-area{
+    padding:30px;
+    min-width:0;
+    overflow:hidden;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    align-items:center;
+    margin-bottom:24px;
+}
+
+.topbar h1{
+    font-size:2rem;
+    margin:0;
+}
+
+.topbar p{
+    color:var(--muted);
+}
+
+.logout{
+    color:var(--primary-dark);
+    font-weight:700;
+    text-decoration:none;
+}
+
+/* STATISTIK */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:16px;
+    margin-bottom:24px;
+}
+
+.stat{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:20px;
+    min-width:0;
+}
+
+.stat small{
+    color:var(--muted);
+}
+
+.stat strong{
+    display:block;
+    font-size:2rem;
+    margin-top:4px;
+}
+
+/* PANEL*/
+
+.panel-box{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:22px;
+    margin-bottom:20px;
+    min-width:0;
+}
+
+/*TABLE */
+
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+}
+
+.data-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.data-table th,
+.data-table td{
+    padding:11px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+}
+
+.data-table th{
+    font-size:.85rem;
+    color:var(--muted);
+}
+
+/* 
+   FORM DATA
+    */
+
+.data-form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.data-form .full{
+    grid-column:1/-1;
+}
+
+.data-form label{
+    display:grid;
+    gap:6px;
+    font-weight:700;
+}
+
+.data-form input,
+.data-form select,
+.data-form textarea{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:11px;
+    font:inherit;
+    box-sizing:border-box;
+}
+
+.data-form textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+/* 
+   BUTTON / ACTION
+    */
+
+.action-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.small-btn{
+    border:0;
+    border-radius:9px;
+    padding:8px 11px;
+    cursor:pointer;
+    font-weight:700;
+    background:#f4eef0;
+    color:var(--primary-dark);
+}
+
+.small-btn.danger{
+    background:#fff0f0;
+    color:#a33;
+}
+
+/* 
+   TABLET
+    */
+
+@media (max-width:1100px){
+
+    .dashboard{
+        grid-template-columns:205px minmax(0,1fr);
+    }
+
+    .sidebar{
+        padding:22px 14px;
+    }
+
+    .sidebar a{
+        font-size:.92rem;
+        padding:10px;
+    }
+
+    .main-area{
+        padding:24px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+/* 
+   MOBILE
+    */
+
+@media (max-width:700px){
+
+    .dashboard{
+        display:block;
+        min-height:100vh;
+    }
+
+    .sidebar{
+        min-height:auto;
+        height:auto;
+        position:sticky;
+        top:0;
+        z-index:100;
+        padding:12px 10px;
+        box-shadow:0 3px 12px rgba(0,0,0,.12);
+    }
+
+    .brand{
+        margin:0 0 9px;
+        font-size:1rem;
+    }
+
+    .sidebar nav{
+        display:flex;
+        gap:6px;
+        overflow-x:auto;
+        padding-bottom:3px;
+        scrollbar-width:thin;
+    }
+
+    .sidebar a{
+        flex:0 0 auto;
+        white-space:nowrap;
+        margin:0;
+        padding:9px 11px;
+        font-size:.82rem;
+    }
+
+    .main-area{
+        padding:18px 15px;
+        overflow:visible;
+    }
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+        margin-bottom:18px;
+    }
+
+    .topbar h1{
+        font-size:1.5rem;
+    }
+
+    .topbar p{
+        margin:0;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .stat{
+        padding:17px;
+    }
+
+    .stat strong{
+        font-size:1.7rem;
+    }
+
+    .panel-box{
+        padding:16px;
+        border-radius:16px;
+    }
+
+    .data-form{
+        grid-template-columns:1fr;
+    }
+
+    .data-form .full{
+        grid-column:auto;
+    }
+
+    .table-wrap{
+        margin:0 -2px;
+    }
+
+    .data-table{
+        min-width:700px;
+    }
+}
+
+/* 
+   HP KECIL
+    */
+
+@media (max-width:420px){
+
+    .sidebar{
+        padding:10px 8px;
+    }
+
+    .brand{
+        font-size:.95rem;
+    }
+
+    .sidebar a{
+        padding:8px 10px;
+        font-size:.78rem;
+    }
+
+    .main-area{
+        padding:15px 12px;
+    }
+
+    .topbar h1{
+        font-size:1.35rem;
+    }
+
+    .panel-box{
+        padding:14px;
+    }
+
+    .action-row{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .small-btn{
+        width:100%;
+    }
+}
+
+
+.dashboard .sidebar nav {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: auto;
+    width: 100%;
+    gap: 0;
+}
+
+.dashboard .sidebar nav a {
+    display: block;
+    width: 100%;
+    flex: none;
+    white-space: normal;
+    margin: 5px 0;
+    box-sizing: border-box;
+}
+
+.dashboard .sidebar .brand {
+    width: 100%;
+}
+
+.dashboard .main-area {
+    min-width: 0;
+    width: 100%;
+}
