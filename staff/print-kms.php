@@ -1,6 +1,50 @@
 <?php
-require_once 'auth.php'; require_once __DIR__.'/../config/database.php';
-$id=(int)($_GET['child_id']??0);$s=$pdo->prepare('SELECT * FROM bayi_balita WHERE id=?');$s->execute([$id]);$child=$s->fetch();
-if(!$child){die('Data anak tidak ditemukan.');}
-$s=$pdo->prepare('SELECT * FROM pelayanan_balita WHERE child_id=? ORDER BY service_date ASC');$s->execute([$id]);$rows=$s->fetchAll();
-?><!doctype html><html lang="id"><head><meta charset="utf-8"><title>KMS - <?=htmlspecialchars($child['name'])?></title><link rel="stylesheet" href="../css/staff.css"></head><body class="print-page"><h1>KMS Digital</h1><h2><?=htmlspecialchars($child['name'])?></h2><p>Tanggal lahir: <?=htmlspecialchars($child['birth_date']?:'-')?> | Jenis kelamin: <?=htmlspecialchars($child['gender']?:'-')?></p><table class="data-table"><tr><th>Tanggal</th><th>BB</th><th>TB/PB</th><th>LK</th><th>Status Gizi</th><th>Catatan</th></tr><?php foreach($rows as $r):?><tr><td><?=htmlspecialchars($r['service_date'])?></td><td><?=htmlspecialchars($r['weight']??'-')?> kg</td><td><?=htmlspecialchars($r['height']??'-')?> cm</td><td><?=htmlspecialchars($r['head_circumference']??'-')?> cm</td><td><?=htmlspecialchars($r['nutrition_status']?:'-')?></td><td><?=htmlspecialchars($r['notes']?:'-')?></td></tr><?php endforeach;?></table><script>window.onload=()=>window.print();</script></body></html>
+require_once 'auth.php';
+require_once __DIR__ . '/../config/database.php';
+$id = (int)($_GET['child_id'] ?? 0);
+$s = $pdo->prepare('SELECT * FROM bayi_balita WHERE id=?');
+$s->execute([$id]);
+$child = $s->fetch();
+if (!$child) {
+    die('Data anak tidak ditemukan.');
+}
+$s = $pdo->prepare('SELECT * FROM pelayanan_balita WHERE child_id=? ORDER BY service_date ASC');
+$s->execute([$id]);
+$rows = $s->fetchAll();
+?>
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>KMS - <?= htmlspecialchars($child['name']) ?></title>
+    <link rel="stylesheet" href="../css/staff.css">
+</head>
+
+<body class="print-page">
+    <h1>KMS Digital</h1>
+    <h2><?= htmlspecialchars($child['name']) ?></h2>
+    <p>Tanggal lahir: <?= htmlspecialchars($child['birth_date'] ?: '-') ?> | Jenis kelamin: <?= htmlspecialchars($child['gender'] ?: '-') ?></p>
+    <table class="data-table">
+        <tr>
+            <th>Tanggal</th>
+            <th>BB</th>
+            <th>TB/PB</th>
+            <th>LK</th>
+            <th>Status Gizi</th>
+            <th>Catatan</th>
+        </tr><?php foreach ($rows as $r): ?><tr>
+                <td><?= htmlspecialchars($r['service_date']) ?></td>
+                <td><?= htmlspecialchars($r['weight'] ?? '-') ?> kg</td>
+                <td><?= htmlspecialchars($r['height'] ?? '-') ?> cm</td>
+                <td><?= htmlspecialchars($r['head_circumference'] ?? '-') ?> cm</td>
+                <td><?= htmlspecialchars($r['nutrition_status'] ?: '-') ?></td>
+                <td><?= htmlspecialchars($r['notes'] ?: '-') ?></td>
+            </tr><?php endforeach; ?>
+    </table>
+    <script>
+        window.onload = () => window.print();
+    </script>
+</body>
+
+</html>
