@@ -42,7 +42,7 @@ $rows = $s->fetchAll();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Data Bayi/Balita</title>
+    <title>Data Bayi/Anak</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/staff.css">
 </head>
@@ -56,7 +56,7 @@ $rows = $s->fetchAll();
         <main class="main-area">
             <div class="topbar">
                 <div>
-                    <h1>Data Bayi/Balita</h1>
+                    <h1>Data Bayi/Anak</h1>
                     <p>Catat data dasar dan hasil pengukuran.</p>
                 </div>
             </div>
