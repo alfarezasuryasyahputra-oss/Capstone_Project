@@ -33,7 +33,7 @@ $recent = $pdo->query('SELECT name,service,requested_date,status FROM appointmen
             </div>
             <div class="stats">
                 <div class="stat"><small>Ibu Hamil</small><strong><?= $ih ?></strong></div>
-                <div class="stat"><small>Bayi/Balita</small><strong><?= $bb ?></strong></div>
+                <div class="stat"><small>Bayi/Anak</small><strong><?= $bb ?></strong></div>
                 <div class="stat"><small>Appointment</small><strong><?= $ap ?></strong></div>
                 <div class="stat"><small>Menunggu</small><strong><?= $pending ?></strong></div>
             </div>
