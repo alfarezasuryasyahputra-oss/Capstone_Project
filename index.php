@@ -18,7 +18,7 @@
         <a href="#care">Ibu Hamil & Balita</a>
         <a href="#tips">Tips</a>
         <a href="#contact">Contact</a>
-        <a class="staff-link" href="staff/login.php">Staff</a>
+        <a class="staff-link" href="staff/login.php">Admin/Kader</a><a class="staff-link" href="parent/login.php">Orang Tua</a>
       </div>
       <a class="btn btn-primary nav-cta" href="#appointment">Booking untuk Kunjungan</a>
       <button class="menu" id="menuBtn" aria-label="Open menu">☰</button>
@@ -135,6 +135,10 @@
           <div class="field">
             <label for="date">Tanggal yang diinginkan</label>
             <input id="date" name="date" type="date">
+          </div>
+          <div class="field">
+            <label for="time">Jam pertemuan</label>
+            <input id="time" name="time" type="time">
           </div>
           <div class="field full">
             <label for="message">Catatan tambahan</label>

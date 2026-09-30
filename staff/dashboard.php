@@ -5,7 +5,7 @@ $ih = (int)$pdo->query('SELECT COUNT(*) FROM ibu_hamil')->fetchColumn();
 $bb = (int)$pdo->query('SELECT COUNT(*) FROM bayi_balita')->fetchColumn();
 $ap = (int)$pdo->query('SELECT COUNT(*) FROM appointments')->fetchColumn();
 $pending = (int)$pdo->query("SELECT COUNT(*) FROM appointments WHERE status='Menunggu'")->fetchColumn();
-$recent = $pdo->query('SELECT name,service,requested_date,status FROM appointments ORDER BY id DESC LIMIT 8')->fetchAll();
+$recent = $pdo->query('SELECT name,service,requested_date,requested_time,status FROM appointments ORDER BY id DESC LIMIT 8')->fetchAll();
 ?>
 <!doctype html>
 <html lang="id">
@@ -20,10 +20,7 @@ $recent = $pdo->query('SELECT name,service,requested_date,status FROM appointmen
 
 <body>
     <div class="dashboard">
-        <aside class="sidebar">
-            <div class="brand">♡ Posyandu Staff</div>
-            <nav><a class="active" href="dashboard.php">Dashboard</a><a href="ibu-hamil.php">Ibu Hamil</a><a href="bayi-balita.php">Bayi/Balita</a><a href="appointment.php">Appointment</a><a href="../index.php">Website Publik</a><a href="logout.php">Logout</a></nav>
-        </aside>
+        <?php require __DIR__ . '/sidebar.php'; ?>
         <main class="main-area">
             <div class="topbar">
                 <div>
@@ -44,15 +41,15 @@ $recent = $pdo->query('SELECT name,service,requested_date,status FROM appointmen
                         <tr>
                             <th>Nama</th>
                             <th>Keperluan</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal</th><th>Jam</th>
                             <th>Status</th>
                         </tr><?php foreach ($recent as $r): ?><tr>
                                 <td><?= htmlspecialchars($r['name']) ?></td>
                                 <td><?= htmlspecialchars($r['service']) ?></td>
-                                <td><?= htmlspecialchars($r['requested_date'] ?: '-') ?></td>
+                                <td><?= htmlspecialchars($r['requested_date'] ?: '-') ?></td><td><?= htmlspecialchars($r['requested_time'] ? substr($r['requested_time'],0,5) : '-') ?></td>
                                 <td><?= htmlspecialchars($r['status']) ?></td>
                             </tr><?php endforeach; ?><?php if (!$recent): ?><tr>
-                                <td colspan="4">Belum ada appointment.</td>
+                                <td colspan="5">Belum ada appointment.</td>
                             </tr><?php endif; ?>
                     </table>
                 </div>

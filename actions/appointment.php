@@ -12,6 +12,7 @@ $name = trim($_POST['name'] ?? '');
 $phone = trim($_POST['phone'] ?? '');
 $service = trim($_POST['service'] ?? '');
 $date = trim($_POST['date'] ?? '');
+$time = trim($_POST['time'] ?? '');
 $message = trim($_POST['message'] ?? '');
 
 if ($name === '' || $phone === '') {
@@ -21,9 +22,9 @@ if ($name === '' || $phone === '') {
 }
 
 $stmt = $pdo->prepare(
-  'INSERT INTO appointments (name,phone,service,requested_date,message,status)
-  VALUES (?,?,?,?,?,?)'
+  'INSERT INTO appointments (name,phone,service,requested_date,requested_time,message,status)
+  VALUES (?,?,?,?,?,?,?)'
 );
-$stmt->execute([$name, $phone, $service, $date !== '' ? $date : null, $message, 'Menunggu']);
+$stmt->execute([$name, $phone, $service, $date !== '' ? $date : null, $time !== '' ? $time : null, $message, 'Menunggu']);
 
 echo json_encode(['success' => true]);

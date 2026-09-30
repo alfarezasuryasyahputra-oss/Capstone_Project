@@ -22,10 +22,7 @@ $rows = $pdo->query('SELECT * FROM appointments ORDER BY id DESC')->fetchAll();
 
 <body>
     <div class="dashboard">
-        <aside class="sidebar">
-            <div class="brand">♡ Posyandu Staff</div>
-            <nav><a href="dashboard.php">Dashboard</a><a href="ibu-hamil.php">Ibu Hamil</a><a href="bayi-balita.php">Bayi/Balita</a><a class="active" href="appointment.php">Appointment</a><a href="../index.php">Website Publik</a><a href="logout.php">Logout</a></nav>
-        </aside>
+        <?php require __DIR__ . '/sidebar.php'; ?>
         <main class="main-area">
             <div class="topbar">
                 <div>
@@ -40,7 +37,7 @@ $rows = $pdo->query('SELECT * FROM appointments ORDER BY id DESC')->fetchAll();
                             <th>Nama</th>
                             <th>Telepon</th>
                             <th>Keperluan</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal</th><th>Jam</th>
                             <th>Catatan</th>
                             <th>Status</th>
                         </tr>
@@ -48,7 +45,7 @@ $rows = $pdo->query('SELECT * FROM appointments ORDER BY id DESC')->fetchAll();
                                 <td><?= htmlspecialchars($r['name']) ?></td>
                                 <td><?= htmlspecialchars($r['phone']) ?></td>
                                 <td><?= htmlspecialchars($r['service']) ?></td>
-                                <td><?= htmlspecialchars($r['requested_date'] ?: '-') ?></td>
+                                <td><?= htmlspecialchars($r['requested_date'] ?: '-') ?></td><td><?= htmlspecialchars($r['requested_time'] ? substr($r['requested_time'],0,5) : '-') ?></td>
                                 <td><?= htmlspecialchars($r['message'] ?: '-') ?></td>
                                 <td>
                                     <form method="post"><input type="hidden" name="id" value="<?= $r['id'] ?>"><select name="status" onchange="this.form.submit()"><?php foreach (['Menunggu', 'Dikonfirmasi', 'Selesai', 'Dibatalkan'] as $st): ?><option <?= ($r['status'] === $st ? 'selected' : '') ?>><?= $st ?></option><?php endforeach; ?></select></form>

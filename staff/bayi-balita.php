@@ -10,12 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
     if ($a === 'save') {
-        $d = [trim($_POST['name'] ?? ''), trim($_POST['mother_name'] ?? ''), $_POST['birth_date'] ?: null, $_POST['gender'] ?? '', $_POST['weight'] !== '' ? $_POST['weight'] : null, $_POST['height'] !== '' ? $_POST['height'] : null, $_POST['head_circumference'] !== '' ? $_POST['head_circumference'] : null, trim($_POST['notes'] ?? '')];
+        $d = [trim($_POST['name'] ?? ''), trim($_POST['mother_name'] ?? ''), !empty($_POST['mother_id']) ? (int)$_POST['mother_id'] : null, $_POST['birth_date'] ?: null, $_POST['gender'] ?? '', $_POST['weight'] !== '' ? $_POST['weight'] : null, $_POST['height'] !== '' ? $_POST['height'] : null, $_POST['head_circumference'] !== '' ? $_POST['head_circumference'] : null, trim($_POST['notes'] ?? '')];
         if (!empty($_POST['id'])) {
-            $s = $pdo->prepare('UPDATE bayi_balita SET name=?,mother_name=?,birth_date=?,gender=?,weight=?,height=?,head_circumference=?,notes=? WHERE id=?');
+            $s = $pdo->prepare('UPDATE bayi_balita SET name=?,mother_name=?,mother_id=?,birth_date=?,gender=?,weight=?,height=?,head_circumference=?,notes=? WHERE id=?');
             $s->execute([...$d, (int)$_POST['id']]);
         } else {
-            $s = $pdo->prepare('INSERT INTO bayi_balita(name,mother_name,birth_date,gender,weight,height,head_circumference,notes) VALUES(?,?,?,?,?,?,?,?)');
+            $s = $pdo->prepare('INSERT INTO bayi_balita(name,mother_name,mother_id,birth_date,gender,weight,height,head_circumference,notes) VALUES(?,?,?,?,?,?,?,?,?)');
             $s->execute($d);
         }
         header('Location: bayi-balita.php');
@@ -35,6 +35,7 @@ if ($q !== '') {
     $s->execute([$like, $like]);
 }
 $rows = $s->fetchAll();
+$mothers = $pdo->query('SELECT id,name FROM ibu_hamil ORDER BY name')->fetchAll();
 ?>
 <!doctype html>
 <html lang="id">
@@ -49,10 +50,7 @@ $rows = $s->fetchAll();
 
 <body>
     <div class="dashboard">
-        <aside class="sidebar">
-            <div class="brand">♡ Posyandu Staff</div>
-            <nav><a href="dashboard.php">Dashboard</a><a href="ibu-hamil.php">Ibu Hamil</a><a class="active" href="bayi-balita.php">Bayi/Anak</a><a href="appointment.php">Appointment</a><a href="../index.php">Website Publik</a><a href="logout.php">Logout</a></nav>
-        </aside>
+        <?php require __DIR__ . '/sidebar.php'; ?>
         <main class="main-area">
             <div class="topbar">
                 <div>
@@ -63,7 +61,7 @@ $rows = $s->fetchAll();
             <div class="panel-box">
                 <h2><?= $edit ? 'Edit Data' : 'Tambah Data' ?></h2>
                 <form method="post" class="data-form"><input type="hidden" name="action" value="save"><input type="hidden" name="id" value="<?= htmlspecialchars($edit['id'] ?? '') ?>">
-                    <label>Nama Anak<input name="name" required value="<?= htmlspecialchars($edit['name'] ?? '') ?>"></label><label>Nama Ibu<input name="mother_name" value="<?= htmlspecialchars($edit['mother_name'] ?? '') ?>"></label>
+                    <label>Nama Anak<input name="name" required value="<?= htmlspecialchars($edit['name'] ?? '') ?>"></label><label>Nama Ibu<input name="mother_name" value="<?= htmlspecialchars($edit['mother_name'] ?? '') ?>"></label><label>Hubungkan ke Data Ibu<select name="mother_id"><option value="">Tidak dipilih</option><?php foreach($mothers as $m): ?><option value="<?= $m['id'] ?>" <?= ((int)($edit['mother_id'] ?? 0)===(int)$m['id'])?'selected':'' ?>><?= htmlspecialchars($m['name']) ?></option><?php endforeach; ?></select></label>
                     <label>Tanggal Lahir<input type="date" name="birth_date" value="<?= htmlspecialchars($edit['birth_date'] ?? '') ?>"></label><label>Jenis Kelamin<select name="gender">
                             <option value="">Pilih</option>
                             <option <?= ($edit['gender'] ?? '') === 'Laki-laki' ? 'selected' : '' ?>>Laki-laki</option>
@@ -75,7 +73,7 @@ $rows = $s->fetchAll();
                 </form>
             </div>
             <div class="panel-box">
-                <h2>Daftar Bayi/Anak</h2>
+                <div class="panel-title-row"><h2>Daftar Bayi/Anak</h2><a class="small-btn" href="print-bayi-balita.php" target="_blank">🖨 Cetak / PDF</a></div>
                 <form method="get" class="action-row"><input name="q" placeholder="Cari nama anak / ibu" value="<?= htmlspecialchars($q) ?>"><button class="small-btn">Cari</button></form>
                 <div class="table-wrap">
                     <table class="data-table">
