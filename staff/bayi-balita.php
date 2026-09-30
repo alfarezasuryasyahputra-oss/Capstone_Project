@@ -14,9 +14,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!empty($_POST['id'])) {
             $s = $pdo->prepare('UPDATE bayi_balita SET name=?,mother_name=?,mother_id=?,birth_date=?,gender=?,weight=?,height=?,head_circumference=?,notes=? WHERE id=?');
             $s->execute([...$d, (int)$_POST['id']]);
+            $childId=(int)$_POST['id'];
         } else {
             $s = $pdo->prepare('INSERT INTO bayi_balita(name,mother_name,mother_id,birth_date,gender,weight,height,head_circumference,notes) VALUES(?,?,?,?,?,?,?,?,?)');
             $s->execute($d);
+            $childId=(int)$pdo->lastInsertId();
+        }
+
+        // Jika anak memiliki Ibu yang sudah terhubung ke akun Orang Tua,
+        // otomatis tambahkan anak ini ke akun tersebut. Tidak perlu membuat
+        // akun baru atau memilih anak dengan Ctrl + Click.
+        if (!empty($d[2]) && $childId) {
+            $sync = $pdo->prepare('INSERT IGNORE INTO parent_children(parent_id,child_id) SELECT pm.parent_id, ? FROM parent_mothers pm WHERE pm.mother_id=?');
+            $sync->execute([$childId,(int)$d[2]]);
         }
         header('Location: bayi-balita.php');
         exit;

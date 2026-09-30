@@ -27,8 +27,13 @@ $s->execute([$parentId]);
 $parent=$s->fetch();
 if(!$parent){session_destroy();header('Location: login.php');exit;}
 
-$s=$pdo->prepare('SELECT b.* FROM bayi_balita b INNER JOIN parent_children pc ON pc.child_id=b.id WHERE pc.parent_id=? ORDER BY b.name');
-$s->execute([$parentId]);
+$s=$pdo->prepare('SELECT DISTINCT b.*
+    FROM bayi_balita b
+    LEFT JOIN parent_children pc ON pc.child_id=b.id AND pc.parent_id=?
+    LEFT JOIN parent_mothers pm ON pm.mother_id=b.mother_id AND pm.parent_id=?
+    WHERE pc.parent_id IS NOT NULL OR pm.parent_id IS NOT NULL
+    ORDER BY b.name');
+$s->execute([$parentId,$parentId]);
 $children=$s->fetchAll();
 
 $s=$pdo->prepare('SELECT m.* FROM ibu_hamil m INNER JOIN parent_mothers pm ON pm.mother_id=m.id WHERE pm.parent_id=? ORDER BY m.name');
