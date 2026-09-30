@@ -51,7 +51,7 @@ $rows = $s->fetchAll();
     <div class="dashboard">
         <aside class="sidebar">
             <div class="brand">♡ Posyandu Staff</div>
-            <nav><a href="dashboard.php">Dashboard</a><a href="ibu-hamil.php">Ibu Hamil</a><a class="active" href="bayi-balita.php">Bayi/Balita</a><a href="appointment.php">Appointment</a><a href="../index.php">Website Publik</a><a href="logout.php">Logout</a></nav>
+            <nav><a href="dashboard.php">Dashboard</a><a href="ibu-hamil.php">Ibu Hamil</a><a class="active" href="bayi-balita.php">Bayi/Anak</a><a href="appointment.php">Appointment</a><a href="../index.php">Website Publik</a><a href="logout.php">Logout</a></nav>
         </aside>
         <main class="main-area">
             <div class="topbar">
@@ -75,7 +75,7 @@ $rows = $s->fetchAll();
                 </form>
             </div>
             <div class="panel-box">
-                <h2>Daftar Bayi/Balita</h2>
+                <h2>Daftar Bayi/Anak</h2>
                 <form method="get" class="action-row"><input name="q" placeholder="Cari nama anak / ibu" value="<?= htmlspecialchars($q) ?>"><button class="small-btn">Cari</button></form>
                 <div class="table-wrap">
                     <table class="data-table">
