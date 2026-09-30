@@ -158,7 +158,7 @@
       </div>
       <div class="tip-list">
         <article class="tip"><small>01 · Kehamilan</small><h3>Simpan janji temu Anda</h3><p>Periksa rutin membantu tim perawatan Anda memantau kehamilan dan menjawab pertanyaan seiring munculnya.</p></article>
-        <article class="tip"><small>02 · Orang tua baru</small><h3>Tanyakan pertanyaan</h3><p>Tidak ada pertanyaan yang bodoh. Tuliskan kekhawatiran sebelum berkunjung agar Anda tidak lupa.</p></article>
+        <article class="tip"><small>02 · Orang tua baru</small><h3>Tanyakan pertanyaan</h3><p>Tuliskan kekhawatiran sebelum berkunjung agar Anda tidak lupa.</p></article>
         <article class="tip"><small>03 · Bayi</small><h3>Ketahui kapan harus mencari bantuan</h3><p>Jika Anda khawatir akan gejala mendadak, hubungi penyedia layanan kesehatan Anda atau layanan darurat setempat secepatnya.</p></article>
       </div>
     </div>
