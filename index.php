@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Website klinik modern dan hangat untuk perawatan ibu hamil dan bayi." />
-  <title>Posyandu | Ibu Hamil & Balita</title>
+  <title>Posyandu Bina Warga | Ibu Hamil & Balita</title>
   
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,7 +12,7 @@
 <header>
   <div class="container">
     <nav>
-      <a class="logo" href="#home"><span class="logo-mark">♡</span> Posyandu </a>
+      <a class="logo" href="#home"><span class="logo-mark">♡</span> Posyandu Bina Warga</a>
       <div class="nav-links" id="navLinks">
         <a href="#services">Layanan</a>
         <a href="#care">Ibu Hamil & Balita</a>
